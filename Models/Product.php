@@ -12,14 +12,14 @@ class Product
 
 
 
-    public function __construct($_title, $_price, $_rate, $_img)
+    public function __construct($_title, $_price, $_rate, $_img, $a, $b)
     {
         $this->title = $_title;
         $this->price = $_price;
         $this->rate = $_rate;
         $this->img = $_img;
-        // $this->animal_type = $_genre;
-        // $this->product_type = $product_type;
+        $this->animal_type = $a;
+        $this->product_type = $b;
     }
 }
 // var_dump($product_type);

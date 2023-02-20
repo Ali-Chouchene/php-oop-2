@@ -3,16 +3,11 @@ require_once __DIR__ . '/../data/data.php';
 
 class ProductType
 {
-    public $types = [];
+    public $name;
 
 
-    public function __construct($_genres)
+    public function __construct($types)
     {
-        $this->types = $_genres;
+        $this->name = $types;
     }
-}
-
-foreach ($prod_types as $type) {
-    $a[] = $type;
-    $types = new ProductType($a);
 }

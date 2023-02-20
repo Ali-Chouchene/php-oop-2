@@ -1,11 +1,13 @@
 <?php
+
+
 include_once __DIR__ . '/Models/Product.php';
 include_once __DIR__ . '/Models/Animal_Genre.php';
 include_once __DIR__ . '/Models/Product_Type.php';
 
 foreach ($animals as $pet) {
     $b[] = $pet;
-    $types = new AnimalGenre($b);
+    $genres = new AnimalGenre($b);
 }
 
 foreach ($prod_types as $type) {
@@ -13,11 +15,16 @@ foreach ($prod_types as $type) {
     $types = new ProductType($a);
 }
 
-$product1 = new Product('Materassino', 35, 3, 'https://www.cucina-naturale.it/wp-content/uploads/2019/10/Cuccia2.jpg');
-$product2 = new Product('bogrgr', 42.99, 5, 'https://www.sentieridelcinema.it/wp-content/uploads/2016/03/DIDSTt02PCVuYXZlAT1Ue69ysicDGveOrmmB.jpg');
-$product3 = new Product('rg3e4gg', 12.99, 5, 'https://i.ebayimg.com/images/g/JhMAAOSwh-1W1qTo/s-l500.jpg');
+$product1 = new Product('Materassino', 35, 3, 'https://www.cucina-naturale.it/wp-content/uploads/2019/10/Cuccia2.jpg', 3, 0);
+$product2 = new Product('Telecamera', 124.99, 5, 'https://staticfanpage.akamaized.net/wp-content/uploads/sites/6/2020/06/accessori-tech-cani-1200x675.jpg', 3, 4);
+$product3 = new Product('Cuccia', 29.99, 5, 'https://media.lavorincasa.it/post/16/15729/data/cuccia-design.jpg', 2, 1);
+$product4 = new Product('Gabbia', 149.99, 3, 'https://www.prezzoforte.it/images/webp/AllMyPets_52ekD10_305020_1.webp', 3, 2);
+$product5 = new Product('Cibo Pesci Rossi', 9.99, 4, 'https://ibrio.it/5266-Ebay/tetra-goldfish-gold-energy-250-ml-mangime-superiore-in-granuli-per-pesci-rossi-con-minerali-essenziali.jpg', 1, 3);
+$product6 = new Product('Pettines', 9.99, 4, 'https://m.media-amazon.com/images/I/5153Oq1xwwL._AC_SY355_.jpg', 2, 1);
 
-$products = [$product1, $product2, $product3];
+
+
+$products = [$product1, $product2, $product3, $product4, $product5, $product6];
 ?>
 
 
@@ -34,7 +41,7 @@ $products = [$product1, $product2, $product3];
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!--stylesheet-->
-    <link rel="stylesheet" href="/php-oop-1/css/style.css">
+    <!-- <link rel="stylesheet" href="/php-oop-2/css/style.css"> -->
     <!--Vue JS-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!--Axios-->
@@ -51,6 +58,13 @@ $products = [$product1, $product2, $product3];
     .fa-gold {
         color: goldenrod;
     }
+
+    img {
+        width: 100%;
+        min-height: 250px;
+        object-fit: cover;
+        object-position: right;
+    }
 </style>
 
 <body>
@@ -65,15 +79,19 @@ $products = [$product1, $product2, $product3];
         <div class="container">
             <div class="row text-center row-cols-1 row-cols-md-3 py-5">
                 <?php foreach ($products as $product) : ?>
-                    <div class="col">
+                    <div class="col my-3">
                         <div class="card mx-auto" style="width: 18rem;">
                             <img src="<?= $product->img ?>" class="card-img-top img-fluid" alt="<?= $product->title ?>">
                             <div class="card-body">
                                 <h3 class="card-title"><?= $product->title ?></h3>
-                                <h4 class="card-title"><?= $product->price ?>&euro;</h4>
+                                <h5 class="card-title"><?= $product->price ?>&euro;</h5>
                                 <h5><?= $product->rate ?><i class="fa-solid fa-star fa-gold fa-xs"></i></h5>
-                                <!-- <h6>Genere: <?= $product->$types ?></h6> -->
-
+                                <?php foreach ($types as $type) : ?>
+                                    <h6>Genere: <?= $type[$product->animal_type] ?></h6>
+                                    <?php foreach ($genres as $genre) : ?>
+                                        <h6>Per: <?= $genre[$product->product_type] ?></h6>
+                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -83,7 +101,5 @@ $products = [$product1, $product2, $product3];
     </main>
 
 </body>
-
-
 
 </html>

@@ -3,20 +3,15 @@ require_once __DIR__ . '/../data/data.php';
 
 class AnimalGenre
 {
-    public $types = [];
+    public $name;
 
 
-    public function __construct($_genres)
+    public function __construct($genres)
     {
-        $this->types = $_genres;
+        $this->name = $genres;
     }
     public function getTypes()
     {
-        return $this->types;
+        return $this->name;
     }
-}
-
-foreach ($animals as $pet) {
-    $b[] = $pet;
-    $types = new AnimalGenre($b);
 }
